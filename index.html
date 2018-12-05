@@ -1,0 +1,190 @@
+<html>
+
+<head>
+
+<style>
+@import url(https://fonts.googleapis.com/css?family=Righteous);
+
+*, *:before, *:after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  position: relative;
+  }
+
+html, body {
+  height: 100%;
+  }
+  body {
+    text-align: center;
+    background-color: hsla(230,40%,50%,1);
+	background-image: linear-gradient(#D179D4, #6C40C0);
+    }
+  body:before {
+    content: '';
+    vertical-align: middle;
+    font-size: 0;
+    height: 100%;
+    }
+
+h1 {
+  display: inline-block;
+  color: white;
+  font-family: 'Righteous', serif;
+  font-size: 12em; 
+  text-shadow: .03em .03em 0 hsla(230,40%,50%,1);
+  margin-top: calc(50vh - 150px);
+  }
+  h1:after {
+    content: attr(data-shadow);
+    position: absolute;
+    top: .06em; left: .06em;
+    z-index: -1;
+    text-shadow: none;
+    background-image:
+      linear-gradient(
+        45deg,
+        transparent 45%,
+        hsla(48,20%,90%,1) 45%,
+        hsla(48,20%,90%,1) 55%,
+        transparent 0
+        );
+    background-size: .05em .05em;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  
+    animation: shad-anim 25s linear infinite;
+    }
+
+@keyframes shad-anim {
+  0% {background-position: 0 0}
+  0% {background-position: 100% -100%}
+  }
+  
+    .container {
+		position: absolute;
+		top: 0px;
+		left: 50vw - 50vh;
+		width: 100vw;
+		height: 100vh;
+    }
+	
+  .radialStripes {
+      background-image: radial-gradient(circle,
+        var(--color1) 0px,
+        var(--color1) calc(var(--offset) + 0px),
+        var(--color2) calc(var(--offset) + 0px),
+        var(--color2) calc(var(--offset) + 200px),
+        var(--color1) calc(var(--offset) + 200px),
+        var(--color1) calc(var(--offset) + 400px),
+        var(--color2) calc(var(--offset) + 400px),
+        var(--color2) calc(var(--offset) + 600px),
+        var(--color1) calc(var(--offset) + 600px),
+        var(--color1) calc(var(--offset) + 800px),
+        var(--color2) calc(var(--offset) + 800px),
+        var(--color2) calc(var(--offset) + 1000px),
+        var(--color1) calc(var(--offset) + 1000px),
+        var(--color1) calc(var(--offset) + 1200px),
+        var(--color2) calc(var(--offset) + 1200px),
+        var(--color2) calc(var(--offset) + 1400px),
+        var(--color1) calc(var(--offset) + 1400px),
+        var(--color1) calc(var(--offset) + 1600px),
+        var(--color2) calc(var(--offset) + 1600px),
+        var(--color2) calc(var(--offset) + 1800px),
+        var(--color1) calc(var(--offset) + 1800px),
+        var(--color1) calc(var(--offset) + 2000px),
+        var(--color2) calc(var(--offset) + 2000px),
+        var(--color2) calc(var(--offset) + 2200px));
+    }
+	
+	.label {
+		color: #9C90E0;
+		font-size: 40px;
+		font-family: 'Righteous', serif;
+		font-weight: bold;
+		display: block;
+		text-shadow: 2px 2px 18px rgba(0, 0, 0, 0.5);
+	}
+	
+	button {
+		position: absolute;
+		bottom: 150px;
+		width: 800px;
+		height: 200px;
+		left: calc(50vw - 400px);
+		
+		border-radius: 100px;
+		background: #FF8BAE;
+		border: none;
+		color: white;
+		
+		font-family: 'Righteous', serif;
+		font-size: 60px;
+		
+		box-shadow: 0px 15px #E77195;
+	}
+</style>
+
+</head>
+
+<body>
+    <div class="container radialStripes"></div>
+	
+	<h1 data-shadow='swoof'>swoof</h1>
+	
+	<span class="label">
+		Low bids
+	</span>
+	
+	<span class="label">
+		great prizes
+	</span>
+	
+	<button>
+		Get Started
+	</button>
+	
+	<script>
+		var container = document.querySelector(".container");
+	 
+		var color1 = "rgba(0,0,0,0)";
+		var color2 = "rgba(255, 255, 255,.2)";
+		var tempColor;
+	 
+		var offset = 0;
+		 
+		container.style.setProperty("--color1", color1);
+		container.style.setProperty("--color2", color2);
+	 
+		function swapColors() {
+		  tempColor = color2;
+	 
+		  color2 = color1;
+		  color1 = tempColor;
+	 
+		  container.style.setProperty("--color1", color1);
+		  container.style.setProperty("--color2", color2);
+		}
+	 
+		function setOffset(value) {
+		  container.style.setProperty("--offset", value + "px");
+		}
+	 
+		function animate() {
+		  offset+= 0.5;
+		 
+		  if (offset > 200) {
+			offset = 0;
+	 
+			swapColors();
+		  }
+	 
+		  setOffset(offset);
+	 
+		  requestAnimationFrame(animate);
+		}
+		animate();
+  </script>
+</body>
+
+</html>
